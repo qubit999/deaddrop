@@ -16,7 +16,6 @@ static TimerHandle_t grace_period_timer = NULL;
 static bool wifi_active = false;
 static bool ble_connected = false;
 
-#define GRACE_PERIOD_MS (15 * 1000)  // 15 seconds
 
 // Forward declarations
 static void on_ble_connect(void);
@@ -46,7 +45,7 @@ static void on_ble_connect(void)
 // BLE disconnection callback - starts grace period
 static void on_ble_disconnect(void)
 {
-    ESP_LOGI(TAG, "BLE disconnected - starting %d second grace period", GRACE_PERIOD_MS / 1000);
+    ESP_LOGI(TAG, "BLE disconnected - starting %d second grace period", BLE_DISCONNECT_GRACE_PERIOD_SEC);
     ble_connected = false;
 
     // Start grace period timer
@@ -137,7 +136,7 @@ void app_main(void)
 
     // Create grace period timer
     grace_period_timer = xTimerCreate("grace_period",
-                                      pdMS_TO_TICKS(GRACE_PERIOD_MS),
+                                      pdMS_TO_TICKS(BLE_DISCONNECT_GRACE_PERIOD_SEC * 1000),
                                       pdFALSE,  // One-shot timer
                                       NULL,
                                       grace_period_callback);
