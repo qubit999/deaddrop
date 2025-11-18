@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeadDrop</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📪 DeadDrop</h1>
+            <button id="createBtn" class="btn-primary">+ New Message</button>
+        </header>
+
+        <main id="notesList">
+            <p class="loading">Loading messages...</p>
+        </main>
+
+        <footer id="statsFooter">
+            <span id="noteCount">0 messages</span>
+            <span id="storageInfo">0 KB used</span>
+            <span style="opacity: 0.5;">© by Q</span>
+        </footer>
+    </div>
+
+    <!-- Create Note Modal -->
+    <div id="createModal" class="modal">
+        <div class="modal-content">
+            <h2>Create Message</h2>
+            <form id="createForm">
+                <label for="titleInput">Title (public)</label>
+                <input type="text" id="titleInput" maxlength="128" required>
+                
+                <label for="messageInput">Message</label>
+                <textarea id="messageInput" rows="8" maxlength="4000" required></textarea>
+                
+                <label for="passwordInput">Password (optional - leave empty for plain text)</label>
+                <input type="password" id="passwordInput" placeholder="Leave empty for no encryption">
+                
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" onclick="closeCreateModal()">Cancel</button>
+                    <button type="submit" class="btn-primary">Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Unlock Note Modal -->
+    <div id="unlockModal" class="modal">
+        <div class="modal-content">
+            <h2 id="unlockTitle">Enter Password</h2>
+            <form id="unlockForm">
+                <label for="unlockPasswordInput">Password</label>
+                <input type="password" id="unlockPasswordInput" required>
+                <p id="unlockError" class="error"></p>
+                
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" onclick="closeUnlockModal()">Cancel</button>
+                    <button type="submit" class="btn-primary">Unlock</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- View Note Modal -->
+    <div id="viewModal" class="modal">
+        <div class="modal-content">
+            <h2 id="viewTitle"></h2>
+            <p id="viewTimestamp" class="timestamp"></p>
+            <div id="viewMessage" class="message-content"></div>
+            
+            <div class="modal-actions">
+                <button type="button" class="btn-danger" onclick="deleteNote()">Delete</button>
+                <button type="button" class="btn-secondary" onclick="closeViewModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="crypto.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
