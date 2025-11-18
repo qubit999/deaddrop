@@ -71,8 +71,6 @@ A secure, BLE-activated encrypted messaging device built on ESP32-S3. DeadDrop a
    idf.py monitor
    ```
 
-   Press `Ctrl+]` to exit monitor.
-
 ## Usage
 
 ### Initial Setup
@@ -187,5 +185,3 @@ deaddrop/
 ## License
 
 © by Q
-
----
